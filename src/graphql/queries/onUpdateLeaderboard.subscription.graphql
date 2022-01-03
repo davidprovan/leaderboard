@@ -1,0 +1,12 @@
+subscription onUpdateLeaderboard($id: ID!) {
+  onUpdateLeaderboard(id: $id) {
+    eventName
+    rows {
+      movement
+      playerName
+      today
+      total
+      thru
+    }
+  }
+}

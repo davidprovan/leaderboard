@@ -1,0 +1,15 @@
+query getLeaderboard($id: ID!) {
+  getLeaderboard(id: $id) {
+    id
+    leaderboard {
+      eventName
+      rows {
+        movement
+        playerName
+        thru
+        today
+        total
+      }
+    }
+  }
+}

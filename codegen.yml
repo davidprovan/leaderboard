@@ -1,0 +1,15 @@
+overwrite: true
+schema: 
+  - https://avs6vwtahva7pdf5xamuv4kbra.appsync-api.us-east-2.amazonaws.com/graphql:
+      headers:
+        x-api-key: da2-gcobpg6ruzcgjdta4354ncxn4e
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
