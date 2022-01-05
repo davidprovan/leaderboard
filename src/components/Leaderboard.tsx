@@ -4,7 +4,7 @@ import { useGetLeaderboardQuery} from '../generated/graphql';
 const Leaderboard:FC = () => {
     const {data, loading} = useGetLeaderboardQuery({
         variables: {
-            id: "R2020493"
+            id: "R2022016"
         }
     });
  

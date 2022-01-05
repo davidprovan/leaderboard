@@ -5,7 +5,7 @@ import LeaderboardRowView from "./LeaderboardRow";
 const LeaderboardAuto:FC = () => {
     const {data, loading} = useOnUpdateLeaderboardSubscription({
         variables: {
-            id: "R2020493"
+            id: "R2022016"
         }
     });
  

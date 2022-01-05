@@ -1,14 +1,11 @@
-import { useMutation } from "@apollo/client";
-import { totalmem } from "os";
+
 import {FC,} from "react";
-import { LeaderboardRowType, useUpdateLeaderboardMutation } from "../generated/graphql";
+import { useUpdateLeaderboardMutation } from "../generated/graphql";
 
 
 const UpdateLeaderboard:FC = () => {
 
     const [updateLeaderboard, {data }] = useUpdateLeaderboardMutation();
-
-    
 
     return (
         <div className="button-update">
@@ -17,7 +14,7 @@ const UpdateLeaderboard:FC = () => {
                 updateLeaderboard({
                     variables : {
                     leaderboardDataInput : {
-                        id: "R2020493"
+                        id: "R2022016"
                     }
                 }
             })}}>Click to Update the Leaderboard</button>

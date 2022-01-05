@@ -18,6 +18,7 @@ mutation updateLeaderboard($leaderboardDataInput: LeaderboardInput ) {
       total
       thru
       score
+      teeTime
       country
     }
   }

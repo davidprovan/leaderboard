@@ -13,6 +13,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The `AWSTimestamp` scalar type provided by AWS AppSync, represents the number of seconds that have elapsed since `1970-01-01T00:00Z`. Negative values are also accepted and these represent the number of seconds till `1970-01-01T00:00Z`.  Timestamps are serialized and deserialized as integers. The minimum supported timestamp value is **`-31557014167219200`** which corresponds to `-1000000000-01-01T00:00Z`. The maximum supported timestamp value is **`31556889864403199`** which corresponds to `1000000000-12-31T23:59:59.999999999Z`. */
+  AWSTimestamp: any;
 };
 
 export type BettingData = {
@@ -129,7 +131,7 @@ export type LeaderboardRow = {
   position?: Maybe<Scalars['String']>;
   score?: Maybe<Scalars['String']>;
   shotDetails?: Maybe<Scalars['String']>;
-  teeTime?: Maybe<Scalars['String']>;
+  teeTime?: Maybe<Scalars['AWSTimestamp']>;
   textScore?: Maybe<Scalars['String']>;
   thru?: Maybe<Scalars['String']>;
   total?: Maybe<Scalars['String']>;
@@ -151,7 +153,7 @@ export type LeaderboardRowInput = {
   position?: InputMaybe<Scalars['String']>;
   score?: InputMaybe<Scalars['String']>;
   shotDetails?: InputMaybe<Scalars['String']>;
-  teeTime?: InputMaybe<Scalars['String']>;
+  teeTime?: InputMaybe<Scalars['AWSTimestamp']>;
   textScore?: InputMaybe<Scalars['String']>;
   thru?: InputMaybe<Scalars['String']>;
   total?: InputMaybe<Scalars['String']>;
@@ -304,21 +306,21 @@ export type GetLeaderboardQueryVariables = Exact<{
 }>;
 
 
-export type GetLeaderboardQuery = { __typename?: 'Query', leaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type GetLeaderboardQuery = { __typename?: 'Query', leaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, teeTime?: any | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 export type OnUpdateLeaderboardSubscriptionVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type OnUpdateLeaderboardSubscription = { __typename?: 'Subscription', onUpdateLeaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type OnUpdateLeaderboardSubscription = { __typename?: 'Subscription', onUpdateLeaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, teeTime?: any | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 export type UpdateLeaderboardMutationVariables = Exact<{
   leaderboardDataInput?: InputMaybe<LeaderboardInput>;
 }>;
 
 
-export type UpdateLeaderboardMutation = { __typename?: 'Mutation', updateLeaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type UpdateLeaderboardMutation = { __typename?: 'Mutation', updateLeaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, teeTime?: any | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 
 export const GetLeaderboardDocument = gql`
@@ -342,6 +344,7 @@ export const GetLeaderboardDocument = gql`
       total
       thru
       score
+      teeTime
       country
     }
   }
@@ -396,6 +399,7 @@ export const OnUpdateLeaderboardDocument = gql`
       total
       thru
       score
+      teeTime
       country
     }
   }
@@ -445,6 +449,7 @@ export const UpdateLeaderboardDocument = gql`
       total
       thru
       score
+      teeTime
       country
     }
   }

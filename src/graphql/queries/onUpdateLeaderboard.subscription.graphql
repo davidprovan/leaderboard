@@ -18,6 +18,7 @@ subscription onUpdateLeaderboard($id: ID!) {
       total
       thru
       score
+      teeTime
       country
     }
   }

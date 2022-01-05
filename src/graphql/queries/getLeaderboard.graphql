@@ -18,6 +18,7 @@ query getLeaderboard($id: ID!) {
       total
       thru
       score
+      teeTime
       country
     }
   }
