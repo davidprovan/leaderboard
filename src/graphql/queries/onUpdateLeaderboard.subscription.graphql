@@ -1,12 +1,24 @@
 subscription onUpdateLeaderboard($id: ID!) {
   onUpdateLeaderboard(id: $id) {
-    eventName
-    rows {
-      movement
-      playerName
-      today
+    id
+    eventId 
+    players {
+      type
+      position
+      displayText
+      player {
+        id
+        firstName
+        lastName
+        shortName
+        displayName
+        amateur
+        favorite
+      }
       total
       thru
+      score
+      country
     }
   }
 }

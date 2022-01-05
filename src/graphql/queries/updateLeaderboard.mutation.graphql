@@ -1,13 +1,24 @@
-mutation updateLeaderboard($leaderboardDataInput: LeaderboardDataInput ) {
-    updateLeaderboard(leaderboardDataInput: $leaderboardDataInput) {
-      id
-      eventName
-      rows {
-        movement
-        playerName
-        thru
-        today
-        total
+mutation updateLeaderboard($leaderboardDataInput: LeaderboardInput ) {
+  updateLeaderboard(leaderboard: $leaderboardDataInput) {
+    id
+    eventId 
+    players {
+      type
+      position
+      displayText
+      player {
+        id
+        firstName
+        lastName
+        shortName
+        displayName
+        amateur
+        favorite
       }
+      total
+      thru
+      score
+      country
     }
+  }
 }

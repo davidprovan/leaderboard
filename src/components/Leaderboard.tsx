@@ -4,7 +4,7 @@ import { useGetLeaderboardQuery} from '../generated/graphql';
 const Leaderboard:FC = () => {
     const {data, loading} = useGetLeaderboardQuery({
         variables: {
-            id: "R101"
+            id: "R2020493"
         }
     });
  
@@ -17,11 +17,11 @@ const Leaderboard:FC = () => {
         return (
             <div>
                 <div>Leaderboard</div>
-                <div>{data?.getLeaderboard?.leaderboard?.eventName ?? " No Name"}</div>
+                <div>{data?.leaderboard?.eventId ?? " No Name"}</div>
                 {
-                    data?.getLeaderboard?.leaderboard?.rows?.map((currentRow) => {
+                    data?.leaderboard?.players?.map((currentPlayer) => {
                         return (
-                            <div>{currentRow?.playerName}</div>
+                            <div>{currentPlayer?.player?.displayName}</div>
                         )
                     })
                 }

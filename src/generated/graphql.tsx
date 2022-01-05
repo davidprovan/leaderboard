@@ -15,65 +15,240 @@ export type Scalars = {
   Float: number;
 };
 
+export type BettingData = {
+  __typename?: 'BettingData';
+  displayIcon?: Maybe<Scalars['String']>;
+  displayText?: Maybe<Scalars['String']>;
+  type?: Maybe<BettingDataType>;
+};
+
+export type BettingDataInput = {
+  displayIcon?: InputMaybe<Scalars['String']>;
+  displayText?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<BettingDataType>;
+};
+
+export enum BettingDataType {
+  Finishes = 'FINISHES',
+  Matchups = 'MATCHUPS',
+  NationalityProps = 'NATIONALITY_PROPS',
+  PlayerProps = 'PLAYER_PROPS',
+  ToWin = 'TO_WIN'
+}
+
+export type Course = {
+  __typename?: 'Course';
+  courseCode?: Maybe<Scalars['String']>;
+  courseName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  scoringLevel?: Maybe<ScoringLevel>;
+};
+
+export type CutLine = {
+  __typename?: 'CutLine';
+  id: Scalars['ID'];
+  score?: Maybe<Scalars['String']>;
+  type?: Maybe<CutLineType>;
+};
+
+export type CutLineInput = {
+  id: Scalars['ID'];
+  score?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<CutLineType>;
+};
+
+export enum CutLineType {
+  Official = 'OFFICIAL',
+  Projected = 'PROJECTED'
+}
+
+export type Groups = {
+  __typename?: 'Groups';
+  backNine?: Maybe<Scalars['Boolean']>;
+  courses: Array<Maybe<Course>>;
+  groupLocation?: Maybe<Scalars['String']>;
+  players: Array<Maybe<Player>>;
+  startTee?: Maybe<Scalars['Int']>;
+  teeTime?: Maybe<Scalars['Int']>;
+};
+
 export type Leaderboard = {
   __typename?: 'Leaderboard';
+  activeRounds?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  adPositions?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  betting?: Maybe<Array<Maybe<BettingData>>>;
+  cutLine?: Maybe<CutLine>;
+  displayText?: Maybe<Scalars['String']>;
+  eventId?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  leaderboard?: Maybe<LeaderboardData>;
+  players?: Maybe<Array<Maybe<LeaderboardRow>>>;
+  roundStatsColor?: Maybe<Scalars['String']>;
+  roundStatus?: Maybe<Scalars['String']>;
+  scoringLevel?: Maybe<ScoringLevel>;
+  scoringType?: Maybe<ScoringType>;
+  statusDisplay?: Maybe<Scalars['String']>;
+  statusHeader?: Maybe<Scalars['String']>;
+  statusIcon?: Maybe<LeaderboardIcon>;
+  tournament?: Maybe<Tournament>;
 };
 
-export type LeaderboardData = {
-  __typename?: 'LeaderboardData';
-  eventName: Scalars['String'];
-  id: Scalars['ID'];
-  rows?: Maybe<Array<Maybe<LeaderboardRow>>>;
-};
+export enum LeaderboardIcon {
+  Delay = 'DELAY',
+  None = 'NONE'
+}
 
-export type LeaderboardDataInput = {
-  evenName: Scalars['String'];
+export type LeaderboardInput = {
+  activeRounds?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  betting?: InputMaybe<Array<InputMaybe<BettingDataInput>>>;
+  cutLine?: InputMaybe<CutLineInput>;
+  displayText?: InputMaybe<Scalars['String']>;
+  eventId?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
-  rows?: InputMaybe<Array<InputMaybe<LeaderboardRowInput>>>;
+  players?: InputMaybe<Array<InputMaybe<LeaderboardRowInput>>>;
+  roundStatsColor?: InputMaybe<Scalars['String']>;
+  roundStatus?: InputMaybe<Scalars['String']>;
+  scoringLevel?: InputMaybe<ScoringLevel>;
+  scoringType?: InputMaybe<ScoringType>;
+  statusDisplay?: InputMaybe<Scalars['String']>;
+  statusHeader?: InputMaybe<Scalars['String']>;
+  statusIcon?: InputMaybe<LeaderboardIcon>;
 };
 
 export type LeaderboardRow = {
   __typename?: 'LeaderboardRow';
-  movement?: Maybe<Scalars['String']>;
-  playerName?: Maybe<Scalars['String']>;
+  backNine?: Maybe<Scalars['Boolean']>;
+  country?: Maybe<Scalars['String']>;
+  currentRound?: Maybe<Scalars['String']>;
+  displayText?: Maybe<Scalars['String']>;
+  leaderboardSortOrder?: Maybe<Scalars['Int']>;
+  liveChannel?: Maybe<Scalars['String']>;
+  liveVideoState?: Maybe<LiveVideoState>;
+  par?: Maybe<Scalars['Int']>;
+  player?: Maybe<Player>;
+  playerSponsor?: Maybe<PlayerSponsor>;
+  position?: Maybe<Scalars['String']>;
+  score?: Maybe<Scalars['String']>;
+  shotDetails?: Maybe<Scalars['String']>;
+  teeTime?: Maybe<Scalars['String']>;
+  textScore?: Maybe<Scalars['String']>;
   thru?: Maybe<Scalars['String']>;
-  today?: Maybe<Scalars['String']>;
   total?: Maybe<Scalars['String']>;
+  type?: Maybe<LeaderboardRowType>;
+  yardage?: Maybe<Scalars['Int']>;
 };
 
 export type LeaderboardRowInput = {
-  movement?: InputMaybe<Scalars['String']>;
-  playerName?: InputMaybe<Scalars['String']>;
+  backNine?: InputMaybe<Scalars['Boolean']>;
+  country?: InputMaybe<Scalars['String']>;
+  currentRound?: InputMaybe<Scalars['String']>;
+  displayText?: InputMaybe<Scalars['String']>;
+  leaderboardSortOrder?: InputMaybe<Scalars['Int']>;
+  liveChannel?: InputMaybe<Scalars['String']>;
+  liveVideoState?: InputMaybe<LiveVideoState>;
+  par?: InputMaybe<Scalars['Int']>;
+  player?: InputMaybe<PlayerInput>;
+  playerSponsor?: InputMaybe<PlayerSponsor>;
+  position?: InputMaybe<Scalars['String']>;
+  score?: InputMaybe<Scalars['String']>;
+  shotDetails?: InputMaybe<Scalars['String']>;
+  teeTime?: InputMaybe<Scalars['String']>;
+  textScore?: InputMaybe<Scalars['String']>;
   thru?: InputMaybe<Scalars['String']>;
-  today?: InputMaybe<Scalars['String']>;
   total?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<LeaderboardRowType>;
+  yardage?: InputMaybe<Scalars['Int']>;
 };
+
+export enum LeaderboardRowType {
+  CutLine = 'CUT_LINE',
+  Player = 'PLAYER',
+  PlayOff = 'PLAY_OFF'
+}
+
+export enum LiveVideoState {
+  LiveNow = 'LIVE_NOW',
+  None = 'NONE',
+  Upcoming = 'UPCOMING'
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
-  updateLeaderboard?: Maybe<LeaderboardData>;
+  updateLeaderboard?: Maybe<Leaderboard>;
 };
 
 
 export type MutationUpdateLeaderboardArgs = {
-  leaderboardDataInput?: InputMaybe<LeaderboardDataInput>;
+  leaderboard?: InputMaybe<LeaderboardInput>;
 };
+
+export type Player = {
+  __typename?: 'Player';
+  amateur?: Maybe<Scalars['Boolean']>;
+  displayName?: Maybe<Scalars['String']>;
+  favorite?: Maybe<Scalars['Boolean']>;
+  firstName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lastName?: Maybe<Scalars['String']>;
+  shortName?: Maybe<Scalars['String']>;
+};
+
+export type PlayerInput = {
+  amateur?: InputMaybe<Scalars['Boolean']>;
+  displayName?: InputMaybe<Scalars['String']>;
+  favorite?: InputMaybe<Scalars['Boolean']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lastName?: InputMaybe<Scalars['String']>;
+  shortName?: InputMaybe<Scalars['String']>;
+};
+
+export enum PlayerSponsor {
+  None = 'NONE',
+  Titlelist = 'TITLELIST'
+}
 
 export type Query = {
   __typename?: 'Query';
-  getLeaderboard?: Maybe<Leaderboard>;
+  leaderboard?: Maybe<Leaderboard>;
 };
 
 
-export type QueryGetLeaderboardArgs = {
+export type QueryLeaderboardArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export enum ScoringLevel {
+  Basic = 'BASIC',
+  Stats = 'STATS',
+  Tourcast = 'TOURCAST'
+}
+
+export enum ScoringType {
+  MatchPlay = 'MATCH_PLAY',
+  StrokePlay = 'STROKE_PLAY',
+  TeamCup = 'TEAM_CUP',
+  TeamStroke = 'TEAM_STROKE'
+}
+
+export type Standings = {
+  __typename?: 'Standings';
+  effectiveDate?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
+  leaderboard?: Maybe<Leaderboard>;
+  logo?: Maybe<Scalars['String']>;
+  standingsName?: Maybe<Scalars['String']>;
+  status?: Maybe<StandingsStatus>;
+  title?: Maybe<Scalars['String']>;
 };
+
+export enum StandingsStatus {
+  Official = 'OFFICIAL',
+  Projected = 'PROJECTED'
+}
 
 export type Subscription = {
   __typename?: 'Subscription';
-  onUpdateLeaderboard?: Maybe<LeaderboardData>;
+  onUpdateLeaderboard?: Maybe<Leaderboard>;
 };
 
 
@@ -81,41 +256,93 @@ export type SubscriptionOnUpdateLeaderboardArgs = {
   id: Scalars['ID'];
 };
 
+export type TeeTimeRound = {
+  __typename?: 'TeeTimeRound';
+  groups: Array<Maybe<Groups>>;
+  id: Scalars['ID'];
+  roundDisplayText?: Maybe<Scalars['String']>;
+  roundInt?: Maybe<Scalars['Int']>;
+  roundStatus?: Maybe<Scalars['String']>;
+};
+
+export type TeeTimes = {
+  __typename?: 'TeeTimes';
+  defaultRound?: Maybe<Scalars['Int']>;
+  eventId?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lastUpdated?: Maybe<Scalars['Int']>;
+  rounds?: Maybe<Array<Maybe<TeeTimeRound>>>;
+};
+
+export type Tournament = {
+  __typename?: 'Tournament';
+  courses?: Maybe<Array<Maybe<Course>>>;
+  currentRound?: Maybe<Scalars['Int']>;
+  currentWeather?: Maybe<Weather>;
+  id: Scalars['ID'];
+  roundStatus?: Maybe<Scalars['String']>;
+  timezone?: Maybe<Scalars['String']>;
+  tournamentLogo?: Maybe<Scalars['String']>;
+  tournamentName?: Maybe<Scalars['String']>;
+};
+
+export type Weather = {
+  __typename?: 'Weather';
+  condition?: Maybe<Scalars['String']>;
+  humidity?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  sponsor?: Maybe<Scalars['String']>;
+  tempC?: Maybe<Scalars['String']>;
+  tempF?: Maybe<Scalars['String']>;
+  windDirection?: Maybe<Scalars['String']>;
+  windSpeed?: Maybe<Scalars['String']>;
+};
+
 export type GetLeaderboardQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetLeaderboardQuery = { __typename?: 'Query', getLeaderboard?: { __typename?: 'Leaderboard', id: string, leaderboard?: { __typename?: 'LeaderboardData', eventName: string, rows?: Array<{ __typename?: 'LeaderboardRow', movement?: string | null | undefined, playerName?: string | null | undefined, thru?: string | null | undefined, today?: string | null | undefined, total?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined } | null | undefined };
+export type GetLeaderboardQuery = { __typename?: 'Query', leaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 export type OnUpdateLeaderboardSubscriptionVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type OnUpdateLeaderboardSubscription = { __typename?: 'Subscription', onUpdateLeaderboard?: { __typename?: 'LeaderboardData', eventName: string, rows?: Array<{ __typename?: 'LeaderboardRow', movement?: string | null | undefined, playerName?: string | null | undefined, today?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type OnUpdateLeaderboardSubscription = { __typename?: 'Subscription', onUpdateLeaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 export type UpdateLeaderboardMutationVariables = Exact<{
-  leaderboardDataInput?: InputMaybe<LeaderboardDataInput>;
+  leaderboardDataInput?: InputMaybe<LeaderboardInput>;
 }>;
 
 
-export type UpdateLeaderboardMutation = { __typename?: 'Mutation', updateLeaderboard?: { __typename?: 'LeaderboardData', id: string, eventName: string, rows?: Array<{ __typename?: 'LeaderboardRow', movement?: string | null | undefined, playerName?: string | null | undefined, thru?: string | null | undefined, today?: string | null | undefined, total?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+export type UpdateLeaderboardMutation = { __typename?: 'Mutation', updateLeaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 
 export const GetLeaderboardDocument = gql`
     query getLeaderboard($id: ID!) {
-  getLeaderboard(id: $id) {
+  leaderboard(id: $id) {
     id
-    leaderboard {
-      eventName
-      rows {
-        movement
-        playerName
-        thru
-        today
-        total
+    eventId
+    players {
+      type
+      position
+      displayText
+      player {
+        id
+        firstName
+        lastName
+        shortName
+        displayName
+        amateur
+        favorite
       }
+      total
+      thru
+      score
+      country
     }
   }
 }
@@ -151,13 +378,25 @@ export type GetLeaderboardQueryResult = Apollo.QueryResult<GetLeaderboardQuery, 
 export const OnUpdateLeaderboardDocument = gql`
     subscription onUpdateLeaderboard($id: ID!) {
   onUpdateLeaderboard(id: $id) {
-    eventName
-    rows {
-      movement
-      playerName
-      today
+    id
+    eventId
+    players {
+      type
+      position
+      displayText
+      player {
+        id
+        firstName
+        lastName
+        shortName
+        displayName
+        amateur
+        favorite
+      }
       total
       thru
+      score
+      country
     }
   }
 }
@@ -186,16 +425,27 @@ export function useOnUpdateLeaderboardSubscription(baseOptions: Apollo.Subscript
 export type OnUpdateLeaderboardSubscriptionHookResult = ReturnType<typeof useOnUpdateLeaderboardSubscription>;
 export type OnUpdateLeaderboardSubscriptionResult = Apollo.SubscriptionResult<OnUpdateLeaderboardSubscription>;
 export const UpdateLeaderboardDocument = gql`
-    mutation updateLeaderboard($leaderboardDataInput: LeaderboardDataInput) {
-  updateLeaderboard(leaderboardDataInput: $leaderboardDataInput) {
+    mutation updateLeaderboard($leaderboardDataInput: LeaderboardInput) {
+  updateLeaderboard(leaderboard: $leaderboardDataInput) {
     id
-    eventName
-    rows {
-      movement
-      playerName
-      thru
-      today
+    eventId
+    players {
+      type
+      position
+      displayText
+      player {
+        id
+        firstName
+        lastName
+        shortName
+        displayName
+        amateur
+        favorite
+      }
       total
+      thru
+      score
+      country
     }
   }
 }
