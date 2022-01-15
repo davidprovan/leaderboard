@@ -1,0 +1,33 @@
+query getTeeTimes($id: ID!) {
+  teeTimes(id: $id) {
+    defaultRound
+    rounds {
+      groups {
+        backNine
+        players {
+          amateur
+          country
+          displayName
+          favorite
+          firstName
+          id
+          lastName
+          shortName
+        }
+        startTee
+        teeTime
+        courses {
+          courseCode
+          courseName
+          id
+          scoringLevel
+        }
+      }
+      roundDisplayText
+      roundInt
+      roundStatus
+      id
+    }
+    id
+  }
+}

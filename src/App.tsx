@@ -3,6 +3,7 @@ import {apolloClient} from './apollo/client';
 import {ApolloProvider} from '@apollo/client';
 import Leaderboard from './components/LeaderboardAuto';
 import UpdateLeaderboard from './components/UpdateLeaderboard';
+import TeeTimes from "./components/TeeTimes";
 
 const App:FC = () => {
   return (
@@ -10,6 +11,7 @@ const App:FC = () => {
       <div>
         <UpdateLeaderboard />
         <Leaderboard />
+        <TeeTimes />
       </div>
    </ApolloProvider>
   )

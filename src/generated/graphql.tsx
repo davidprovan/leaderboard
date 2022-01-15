@@ -71,7 +71,7 @@ export type Groups = {
   groupLocation?: Maybe<Scalars['String']>;
   players: Array<Maybe<Player>>;
   startTee?: Maybe<Scalars['Int']>;
-  teeTime?: Maybe<Scalars['Int']>;
+  teeTime?: Maybe<Scalars['AWSTimestamp']>;
 };
 
 export type Leaderboard = {
@@ -186,6 +186,7 @@ export type MutationUpdateLeaderboardArgs = {
 export type Player = {
   __typename?: 'Player';
   amateur?: Maybe<Scalars['Boolean']>;
+  country?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;
   favorite?: Maybe<Scalars['Boolean']>;
   firstName?: Maybe<Scalars['String']>;
@@ -212,10 +213,16 @@ export enum PlayerSponsor {
 export type Query = {
   __typename?: 'Query';
   leaderboard?: Maybe<Leaderboard>;
+  teeTimes?: Maybe<TeeTimes>;
 };
 
 
 export type QueryLeaderboardArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryTeeTimesArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
@@ -234,7 +241,7 @@ export enum ScoringType {
 
 export type Standings = {
   __typename?: 'Standings';
-  effectiveDate?: Maybe<Scalars['Int']>;
+  effectiveDate?: Maybe<Scalars['AWSTimestamp']>;
   id: Scalars['ID'];
   leaderboard?: Maybe<Leaderboard>;
   logo?: Maybe<Scalars['String']>;
@@ -272,7 +279,7 @@ export type TeeTimes = {
   defaultRound?: Maybe<Scalars['Int']>;
   eventId?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  lastUpdated?: Maybe<Scalars['Int']>;
+  lastUpdated?: Maybe<Scalars['AWSTimestamp']>;
   rounds?: Maybe<Array<Maybe<TeeTimeRound>>>;
 };
 
@@ -307,6 +314,13 @@ export type GetLeaderboardQueryVariables = Exact<{
 
 
 export type GetLeaderboardQuery = { __typename?: 'Query', leaderboard?: { __typename?: 'Leaderboard', id: string, eventId?: string | null | undefined, players?: Array<{ __typename?: 'LeaderboardRow', type?: LeaderboardRowType | null | undefined, position?: string | null | undefined, displayText?: string | null | undefined, total?: string | null | undefined, thru?: string | null | undefined, score?: string | null | undefined, teeTime?: any | null | undefined, country?: string | null | undefined, player?: { __typename?: 'Player', id: string, firstName?: string | null | undefined, lastName?: string | null | undefined, shortName?: string | null | undefined, displayName?: string | null | undefined, amateur?: boolean | null | undefined, favorite?: boolean | null | undefined } | null | undefined } | null | undefined> | null | undefined } | null | undefined };
+
+export type GetTeeTimesQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetTeeTimesQuery = { __typename?: 'Query', teeTimes?: { __typename?: 'TeeTimes', defaultRound?: number | null | undefined, id: string, rounds?: Array<{ __typename?: 'TeeTimeRound', roundDisplayText?: string | null | undefined, roundInt?: number | null | undefined, roundStatus?: string | null | undefined, id: string, groups: Array<{ __typename?: 'Groups', backNine?: boolean | null | undefined, startTee?: number | null | undefined, teeTime?: any | null | undefined, players: Array<{ __typename?: 'Player', amateur?: boolean | null | undefined, country?: string | null | undefined, displayName?: string | null | undefined, favorite?: boolean | null | undefined, firstName?: string | null | undefined, id: string, lastName?: string | null | undefined, shortName?: string | null | undefined } | null | undefined>, courses: Array<{ __typename?: 'Course', courseCode?: string | null | undefined, courseName?: string | null | undefined, id: string, scoringLevel?: ScoringLevel | null | undefined } | null | undefined> } | null | undefined> } | null | undefined> | null | undefined } | null | undefined };
 
 export type OnUpdateLeaderboardSubscriptionVariables = Exact<{
   id: Scalars['ID'];
@@ -378,6 +392,69 @@ export function useGetLeaderboardLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetLeaderboardQueryHookResult = ReturnType<typeof useGetLeaderboardQuery>;
 export type GetLeaderboardLazyQueryHookResult = ReturnType<typeof useGetLeaderboardLazyQuery>;
 export type GetLeaderboardQueryResult = Apollo.QueryResult<GetLeaderboardQuery, GetLeaderboardQueryVariables>;
+export const GetTeeTimesDocument = gql`
+    query getTeeTimes($id: ID!) {
+  teeTimes(id: $id) {
+    defaultRound
+    rounds {
+      groups {
+        backNine
+        players {
+          amateur
+          country
+          displayName
+          favorite
+          firstName
+          id
+          lastName
+          shortName
+        }
+        startTee
+        teeTime
+        courses {
+          courseCode
+          courseName
+          id
+          scoringLevel
+        }
+      }
+      roundDisplayText
+      roundInt
+      roundStatus
+      id
+    }
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetTeeTimesQuery__
+ *
+ * To run a query within a React component, call `useGetTeeTimesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTeeTimesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTeeTimesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetTeeTimesQuery(baseOptions: Apollo.QueryHookOptions<GetTeeTimesQuery, GetTeeTimesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTeeTimesQuery, GetTeeTimesQueryVariables>(GetTeeTimesDocument, options);
+      }
+export function useGetTeeTimesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTeeTimesQuery, GetTeeTimesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTeeTimesQuery, GetTeeTimesQueryVariables>(GetTeeTimesDocument, options);
+        }
+export type GetTeeTimesQueryHookResult = ReturnType<typeof useGetTeeTimesQuery>;
+export type GetTeeTimesLazyQueryHookResult = ReturnType<typeof useGetTeeTimesLazyQuery>;
+export type GetTeeTimesQueryResult = Apollo.QueryResult<GetTeeTimesQuery, GetTeeTimesQueryVariables>;
 export const OnUpdateLeaderboardDocument = gql`
     subscription onUpdateLeaderboard($id: ID!) {
   onUpdateLeaderboard(id: $id) {
